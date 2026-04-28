@@ -1,13 +1,8 @@
-# Accredian Enterprise Page (Partial Clone)
-
-This project is a partial clone of the Accredian Enterprise website built for the **Full Stack Developer Intern assignment**.
+# Accredian Enterprise Page
 
 ## Live Submission
 - **Vercel Deployment:** `ADD_YOUR_VERCEL_URL_HERE`
-- **GitHub Repository:** `ADD_YOUR_GITHUB_REPO_URL_HERE`
-- **Submission Form:** https://docs.google.com/forms/d/e/1FAIpQLSeC-GbWRJNCY5ja3nFV8a2G4ChP4Ar_7lMZSbLAtcKRP0oJ2Q/viewform
 
----
 
 ## Assignment Checklist
 
@@ -58,22 +53,6 @@ npm install
 npm run dev
 ```
 
-Open: http://localhost:3000
-
-### Environment Variables
-Create a `.env.local` file (optional for local demo):
-
-```bash
-# Optional: forward captured leads to your webhook endpoint
-LEAD_WEBHOOK_URL=
-
-# Optional: API key for webhook auth (sent as Authorization: Bearer <key>)
-LEAD_WEBHOOK_API_KEY=
-```
-
-> You do **not** need any API key for the default demo flow.  
-> Leads are stored in-memory unless you configure a webhook.
-
 ### Production Build
 ```bash
 npm run build
@@ -81,6 +60,8 @@ npm run start
 ```
 
 ---
+
+## Project Approach
 
 ## Project Approach
 
@@ -105,6 +86,8 @@ npm run start
 - Draft README structure and checklist formatting
 - Suggestions for form-validation and API route shape
 
+
+
 ### What was manually modified/improved
 - Improved section linking and IDs for smooth navigation
 - Implemented and verified real client ↔ API integration for form submission
@@ -114,42 +97,6 @@ npm run start
 
 ---
 
-## API Details
-
-### `POST /api/lead`
-Accepts JSON body:
-```json
-{
-  "name": "string",
-  "email": "string",
-  "company": "string",
-  "size": "string",
-  "message": "string"
-}
-```
-
-Notes:
-- Leads are always stored in an in-memory demo store for this assignment.
-- If `LEAD_WEBHOOK_URL` is set, the API also forwards each lead payload to that webhook URL.
-- If `LEAD_WEBHOOK_API_KEY` is set, it is sent as `Authorization: Bearer <key>` when forwarding.
-
-Response (success):
-```json
-{
-  "ok": true,
-  "lead": {
-    "id": "...",
-    "createdAt": "...",
-    "name": "...",
-    "email": "...",
-    "company": "...",
-    "size": "...",
-    "message": "..."
-  }
-}
-```
-
----
 
 ## Improvements With More Time
 - Match more visual details for closer parity with the reference site

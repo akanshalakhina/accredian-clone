@@ -72,6 +72,7 @@ export async function POST(request: Request) {
           "Content-Type": "application/json",
           ...(leadWebhookApiKey ? { Authorization: `Bearer ${leadWebhookApiKey}` } : {}),
         },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(lead),
       });
       forwarded = webhookRes.ok;
@@ -89,6 +90,7 @@ export async function POST(request: Request) {
     },
     { status: 201 }
   );
+  return NextResponse.json({ ok: true, lead }, { status: 201 });
 }
 
 export async function GET() {
