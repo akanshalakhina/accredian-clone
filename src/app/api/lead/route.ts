@@ -15,6 +15,7 @@ interface StoredLead extends LeadPayload {
 
 const leadsStore: StoredLead[] = [];
 const leadWebhookUrl = process.env.LEAD_WEBHOOK_URL;
+const leadWebhookApiKey = process.env.LEAD_WEBHOOK_API_KEY;
 
 function validateLead(body: Partial<LeadPayload>) {
   const name = body.name?.trim();
@@ -67,6 +68,10 @@ export async function POST(request: Request) {
     try {
       const webhookRes = await fetch(leadWebhookUrl, {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(leadWebhookApiKey ? { Authorization: `Bearer ${leadWebhookApiKey}` } : {}),
+        },
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(lead),
       });
