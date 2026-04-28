@@ -62,7 +62,7 @@ export default function Navbar() {
             <Button
               variant="ghost"
               size="sm"
-              href="#contact"
+              href="/login"
               className={!scrolled ? "text-white hover:bg-white/10 hover:text-white" : ""}
             >
               Log In
@@ -108,7 +108,7 @@ export default function Navbar() {
             </Link>
           ))}
           <div className="mt-3 pt-3 border-t border-slate-100 flex flex-col gap-2">
-            <Button variant="outline" size="sm" href="#contact" className="justify-center">Log In</Button>
+            <Button variant="outline" size="sm" href="/login" className="justify-center">Log In</Button>
             <Button variant="primary" size="sm" href="#contact" className="justify-center">Get a Demo</Button>
           </div>
         </nav>

@@ -41,7 +41,7 @@ function TestimonialCard({ name, role, company, avatar, quote }: Omit<Testimonia
 
 export default function TestimonialsSection() {
   return (
-    <section className="py-24 bg-[#F8FAFC]">
+    <section id="testimonials" className="py-24 bg-[#F8FAFC]">
       <div className="section-container">
 
         {/* Header */}

@@ -1,143 +1,144 @@
-# Accredian Enterprise Clone
+# Accredian Enterprise Page (Partial Clone)
 
-A pixel-faithful, production-quality **partial clone** of [enterprise.accredian.com](https://enterprise.accredian.com/) built as an internship assignment.
+This project is a partial clone of the Accredian Enterprise website built for the **Full Stack Developer Intern assignment**.
 
----
-
-## 🛠 Tech Stack
-
-| Layer | Technology |
-|---|---|
-| Framework | **Next.js 15** (App Router) |
-| Language | **TypeScript** |
-| Styling | **Tailwind CSS v4** |
-| Font | **Inter** (Google Fonts) |
-| Package Manager | npm |
+## Live Submission
+- **Vercel Deployment:** `ADD_YOUR_VERCEL_URL_HERE`
+- **GitHub Repository:** `ADD_YOUR_GITHUB_REPO_URL_HERE`
+- **Submission Form:** https://docs.google.com/forms/d/e/1FAIpQLSeC-GbWRJNCY5ja3nFV8a2G4ChP4Ar_7lMZSbLAtcKRP0oJ2Q/viewform
 
 ---
 
-## ✨ Features Implemented
+## Assignment Checklist
 
-| Section | Details |
-|---|---|
-| **Navbar** | Scroll-aware glass effect · Animated hamburger · Responsive |
-| **Hero** | Gradient background · Floating card · Skill progress bars · Stats strip |
-| **Trusted By** | Auto-scrolling infinite marquee of company logos |
-| **Why Us** | 6-card feature grid with hover gradients and staggered animations |
-| **Programs** | Interactive filter tabs · Program cards with badges |
-| **Testimonials** | 3-column card grid · Gradient CTA banner |
-| **Contact** | Fully controlled form · Success state · Validation |
-| **Footer** | 5-column grid · Social icons · Copyright bar |
+### 1) Landing Page
+- [x] Landing page with all major sections (Hero, Trusted By, Why Us, Programs, Testimonials, Contact)
+- [x] Navigation menu
+- [x] Footer
 
----
+### 2) Functional Requirements
+- [x] Responsive layout for mobile + desktop
+- [x] Clean, structured UI
+- [x] Reusable UI components (`Button`, `Badge`, shared section container styles)
+- [x] Smooth navigation between sections (anchor links + smooth scrolling)
 
-## 📁 Project Structure
+### 3) Mandatory Tech Requirements
+- [x] Next.js with App Router
+- [x] Functional components and hooks
+- [x] Tailwind CSS styling
+- [x] API integration (lead form submits to Next.js API route)
+- [x] Ready for Vercel deployment
+- [x] Functional login navigation (`/login` demo page)
 
-```
-src/
-├── app/
-│   ├── layout.tsx          # Root layout, SEO metadata, fonts
-│   ├── page.tsx            # Home page (server component)
-│   └── globals.css         # Design tokens, animations, base styles
-├── components/
-│   ├── layout/
-│   │   ├── Navbar.tsx      # Sticky, scroll-aware nav
-│   │   └── Footer.tsx      # Dark footer with links
-│   ├── sections/
-│   │   ├── HeroSection.tsx
-│   │   ├── TrustedBySection.tsx
-│   │   ├── WhyUsSection.tsx
-│   │   ├── ProgramsSection.tsx
-│   │   ├── TestimonialsSection.tsx
-│   │   └── ContactSection.tsx
-│   └── ui/
-│       ├── Button.tsx      # Variant/size-aware button primitive
-│       └── Badge.tsx       # Coloured label badge
-├── lib/
-│   └── data.ts             # All static content (single source of truth)
-└── types/
-    └── index.ts            # Shared TypeScript interfaces
-```
+### Bonus
+- [x] Lead capture form
+- [x] Data stored via API route (in-memory mock persistence for demo)
 
 ---
 
-## 🚀 Getting Started
+## Tech Stack
+- **Next.js 16** (App Router)
+- **React 19**
+- **TypeScript**
+- **Tailwind CSS v4**
+
+---
+
+## Local Setup
 
 ### Prerequisites
-- Node.js ≥ 18.17
-- npm ≥ 9
+- Node.js 20+
+- npm 10+
 
 ### Installation
-
 ```bash
-# 1. Clone the repository
-git clone https://github.com/<your-username>/accredian-enterprise-clone.git
-cd accredian-enterprise-clone
-
-# 2. Install dependencies
+git clone <your-repo-url>
+cd accredian-clone
 npm install
-
-# 3. Start the development server
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open: http://localhost:3000
 
-### Build for Production
-
+### Production Build
 ```bash
 npm run build
-npm start
+npm run start
 ```
 
 ---
 
-## 🏗 Architecture Decisions
+## Project Approach
 
-### Server vs Client Components
-- **Page & section components** → Server Components (zero JS bundle cost)  
-- **Interactive components** (Navbar, ProgramsSection, ContactSection) → marked `"use client"` only where needed  
-- This follows the Next.js App Router best practice: *push client boundaries to the leaves*
-
-### Data Layer
-All content lives in `src/lib/data.ts`. To update copy or add programs, you edit one file — no hunting through JSX.
-
-### Design System
-CSS custom properties in `globals.css` define the colour palette and animation library. Tailwind utility classes reference these tokens, keeping the design consistent.
-
----
-
-## 🤖 AI Usage Disclosure
-
-This project was scaffolded and built with **AI assistance** (Antigravity / Claude). Here is what was AI-generated vs manually modified:
-
-| Item | AI-generated | Manually adjusted |
-|---|---|---|
-| Project scaffold (`create-next-app`) | ✅ | — |
-| Component structure & file layout | ✅ | Reviewed & approved |
-| Tailwind class choices | ✅ | Tweaked spacing/colors |
-| Content copy (headings, descriptions) | ✅ | Edited for accuracy |
-| TypeScript interfaces | ✅ | — |
-| Form logic & state management | ✅ | Tested manually |
-| CSS animations | ✅ | Adjusted timing |
-
-> **Key insight:** AI accelerates boilerplate and design patterns. The real engineering decisions — component architecture, Server vs Client boundary, data separation — were planned and verified by the developer.
+1. **Section-first architecture**
+   - Broke the landing page into focused, reusable section components.
+2. **Data-driven content**
+   - Kept static copy and arrays in `src/lib/data.ts` to avoid hardcoding in JSX.
+3. **Reusable UI primitives**
+   - Centralized common styles/behaviors in `Button` and `Badge` components.
+4. **Client boundaries kept minimal**
+   - Used client components only where interactivity was needed (`Navbar`, `ProgramsSection`, `ContactSection`).
+5. **Form + API flow**
+   - Lead form submits to `/api/lead` route with validation and mock persistence.
 
 ---
 
-## 📈 Potential Improvements (Bonus Points)
+## AI Usage (Required Disclosure)
 
-- [ ] **Dark mode** — toggle using `next-themes` and CSS `[data-theme]` selectors  
-- [ ] **Framer Motion** — replace CSS animations with `motion.div` for scroll-triggered reveals  
-- [ ] **CMS integration** — move `lib/data.ts` to Contentful / Sanity for dynamic content  
-- [ ] **API Route** — `app/api/contact/route.ts` to email form submissions via Resend  
-- [ ] **i18n** — add Hindi locale with Next.js internationalization  
-- [ ] **Storybook** — document `Button` and `Badge` with visual stories  
-- [ ] **E2E tests** — Playwright scripts for form submission and nav behaviour  
-- [ ] **Performance audit** — Lighthouse score target ≥ 95 on all metrics  
+### Where AI helped
+- Initial component scaffolding and section decomposition
+- Tailwind utility drafting for layout and spacing
+- Draft README structure and checklist formatting
+- Suggestions for form-validation and API route shape
+
+### What was manually modified/improved
+- Improved section linking and IDs for smooth navigation
+- Implemented and verified real client ↔ API integration for form submission
+- Added robust form states (loading, error, success)
+- Refined assignment mapping/checklist for requirement traceability
+- Ran lint and production build checks, then fixed issues if found
 
 ---
 
-## 📄 License
+## API Details
 
-MIT © 2025 — built for educational purposes as an internship assignment.
+### `POST /api/lead`
+Accepts JSON body:
+```json
+{
+  "name": "string",
+  "email": "string",
+  "company": "string",
+  "size": "string",
+  "message": "string"
+}
+```
+
+Notes:
+- Leads are always stored in an in-memory demo store for this assignment.
+- If `LEAD_WEBHOOK_URL` is set, the API also forwards each lead payload to that webhook URL.
+
+Response (success):
+```json
+{
+  "ok": true,
+  "lead": {
+    "id": "...",
+    "createdAt": "...",
+    "name": "...",
+    "email": "...",
+    "company": "...",
+    "size": "...",
+    "message": "..."
+  }
+}
+```
+
+---
+
+## Improvements With More Time
+- Match more visual details for closer parity with the reference site
+- Integrate persistent storage (Supabase/Postgres) instead of in-memory mock store
+- Add automated tests (Playwright + RTL)
+- Improve accessibility audit score (keyboard focus checks + ARIA refinements)
+- Add analytics/event tracking for lead funnel

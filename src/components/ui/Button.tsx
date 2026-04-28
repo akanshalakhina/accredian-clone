@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 type Variant = "primary" | "secondary" | "outline" | "ghost" | "white";
 type Size    = "sm" | "md" | "lg";
@@ -43,6 +44,10 @@ export default function Button({
   const classes = `${base} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`;
 
   if (href) {
+    if (href.startsWith("/")) {
+      return <Link href={href} className={classes}>{children}</Link>;
+    }
+
     return <a href={href} className={classes}>{children}</a>;
   }
 

@@ -4,7 +4,7 @@ export default function TrustedBySection() {
   const doubled = [...TRUSTED_COMPANIES, ...TRUSTED_COMPANIES];
 
   return (
-    <section className="py-14 bg-white border-y border-slate-100">
+    <section id="companies" className="py-14 bg-white border-y border-slate-100">
       <div className="section-container mb-7">
         <p className="text-center text-xs font-semibold text-slate-400 uppercase tracking-[0.15em]">
           Trusted by leading organizations
