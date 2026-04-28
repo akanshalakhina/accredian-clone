@@ -27,15 +27,39 @@ const TEAM_SIZE_OPTIONS = ["1–50", "51–200", "201–1,000", "1,000+"];
 export default function ContactSection() {
   const [form, setForm]           = useState<FormState>(INITIAL);
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setForm(INITIAL);
+    setError("");
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error ?? "Unable to submit request. Please try again.");
+        return;
+      }
+
+      setSubmitted(true);
+      setForm(INITIAL);
+    } catch {
+      setError("Network error. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -85,7 +109,10 @@ export default function ContactSection() {
                 <h3 className="text-xl font-bold text-slate-900 mb-2">Request Received!</h3>
                 <p className="text-slate-500 text-sm">Our enterprise team will contact you within 24 hours.</p>
                 <button
-                  onClick={() => setSubmitted(false)}
+                  onClick={() => {
+                    setSubmitted(false);
+                    setError("");
+                  }}
                   className="mt-6 text-[#1A56DB] text-sm font-semibold hover:underline"
                 >
                   Submit another request
@@ -95,6 +122,11 @@ export default function ContactSection() {
               <form onSubmit={handleSubmit} noValidate className="space-y-5">
                 <h3 className="text-lg font-bold text-slate-900 mb-1">Request a Free Demo</h3>
                 <p className="text-slate-400 text-xs mb-5">Fill in the details below and we&apos;ll be in touch.</p>
+                {error && (
+                  <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-md px-3 py-2">
+                    {error}
+                  </p>
+                )}
 
                 {/* Name + Email */}
                 <div className="grid sm:grid-cols-2 gap-4">
@@ -157,8 +189,8 @@ export default function ContactSection() {
                   />
                 </label>
 
-                <Button type="submit" variant="primary" size="md" className="w-full justify-center">
-                  Submit Request
+                <Button type="submit" variant="primary" size="md" className="w-full justify-center" disabled={loading}>
+                  {loading ? "Submitting..." : "Submit Request"}
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                   </svg>
